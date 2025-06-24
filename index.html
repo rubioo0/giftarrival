@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      color: black;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-size: 2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer"></div>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const target = new Date("2025-07-12T00:00:00");
+
+      const diff = target - now;
+
+      const timerEl = document.getElementById("timer");
+
+      if (diff <= 0) {
+        timerEl.textContent = "We will meet tomorrow!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      timerEl.textContent =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      requestAnimationFrame(updateCountdown);
+    }
+
+    updateCountdown();
+  </script>
+</body>
+</html>
