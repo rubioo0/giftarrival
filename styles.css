@@ -1,0 +1,264 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: white;
+  color: black;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5em;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  font-weight: 300;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 500px;
+}
+
+/* Envelope styles */
+.envelope-container {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 60px;
+  perspective: 1000px;
+  overflow: hidden; /* Add overflow control to the container */
+  padding-top: 30px; /* Add some padding at top to prevent overflow */
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  border: 1px solid #ddd;
+}
+
+.envelope:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+.front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 0, 0 0);
+  background-color: #d0d0d0;
+  z-index: 3;
+  transform-origin: top;
+  transition: transform 0.4s ease-out;
+  border-bottom: 1px solid #ccc;
+}
+
+.envelope:hover .flap {
+  transform: rotateX(80deg);
+}
+
+.pocket {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0 0 5px 5px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.letter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  background-color: white;
+  border-radius: 3px;
+  z-index: 2;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease-out;
+  transform: translateY(0);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+.envelope:hover .letter {
+  transform: translateY(-20px); /* Reduce the upward movement (was -30px) */
+}
+
+.heart-container {
+  margin-bottom: 15px;
+  margin-top: 0; /* Ensure no top margin */
+  position: relative;
+  top: 5px; /* Move heart down slightly from the top */
+}
+
+.heart-center {
+  position: relative;
+  width: 35px; /* Make heart slightly smaller */
+  height: 35px;
+  background-color: red;
+  transform: rotate(45deg);
+  margin: 10px auto; /* Reduce margin */
+}
+
+.heart-center:before,
+.heart-center:after {
+  content: '';
+  position: absolute;
+  width: 35px; /* Match the new heart size */
+  height: 35px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.heart-center:before {
+  left: -17.5px;
+  top: 0;
+}
+
+.heart-center:after {
+  top: -17.5px;
+  left: 0;
+}
+
+#timer {
+  text-shadow: 0 0 5px rgba(0,0,0,0.1);
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.heart {
+  display: none;
+}
+
+.time-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  margin: 0 3px;
+  box-sizing: border-box;
+}
+
+.time-value {
+  font-weight: 500;
+  font-size: 0.9em;
+  min-width: 30px;
+  display: inline-block;
+}
+
+.time-label {
+  font-size: 0.5em;
+  margin-top: 3px;
+  min-width: 60px;
+  display: inline-block;
+  font-weight: 300;
+}
+
+.message {
+  font-size: 0.5em;
+  opacity: 0.7;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  position: static;
+  font-weight: 300;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.completion-message {
+  font-size: 0.8em;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+/* Make the design responsive */
+@media (max-width: 768px) {
+  .envelope {
+    height: 250px;
+  }
+  
+  #timer {
+    width: 100%;
+  }
+  
+  .time-unit {
+    min-width: 60px;
+  }
+  
+  html, body {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .envelope {
+    height: 200px;
+  }
+  
+  .time-unit {
+    min-width: 50px;
+  }
+  
+  html, body {
+    font-size: 1em;
+  }
+  
+  .time-value {
+    font-size: 0.8em;
+  }
+  
+  .time-label {
+    font-size: 0.4em;
+  }
+}

@@ -4,51 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Countdown</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: white;
-      color: black;
-      font-family: sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-size: 2em;
-      text-align: center;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="timer"></div>
-
-  <script>
-    function updateCountdown() {
-      const now = new Date();
-      const target = new Date("2025-07-12T00:00:00");
-
-      const diff = target - now;
-
-      const timerEl = document.getElementById("timer");
-
-      if (diff <= 0) {
-        timerEl.textContent = "We will meet tomorrow!";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      timerEl.textContent =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-      requestAnimationFrame(updateCountdown);
-    }
-
-    updateCountdown();
-  </script>
+  <main class="container">
+    <div class="envelope-container">
+      <div class="envelope">
+        <div class="front flap"></div>
+        <div class="front pocket"></div>
+        <div class="letter">
+          <div class="heart-container">
+            <div class="heart-center"></div>
+          </div>
+          <section id="timer">
+            <div class="time-container">
+              <div class="time-unit">
+                <span class="time-value" id="days">00</span>
+                <span class="time-label" id="daysText">дні</span>
+              </div>
+              <div class="time-unit">
+                <span class="time-value" id="hours">00</span>
+                <span class="time-label" id="hoursText">години</span>
+              </div>
+              <div class="time-unit">
+                <span class="time-value" id="minutes">00</span>
+                <span class="time-label" id="minutesText">хвилини</span>
+              </div>
+              <div class="time-unit">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label" id="secondsText">секунди</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer class="message">Кожна секунда робить нас ближче ❤</footer>
+  </main>
+  
+  <canvas id="confetti" width="1" height="1"></canvas>
+  <audio id="beep" src="beep.mp3" preload="auto"></audio>
+  
+  <script src="script.js"></script>
 </body>
 </html>
