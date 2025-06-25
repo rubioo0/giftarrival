@@ -12,11 +12,7 @@
     <div class="envelope-container">
       <div class="envelope">
         <div class="front flap"></div>
-        <div class="front pocket"></div>
         <div class="letter">
-          <div class="heart-container">
-            <div class="heart-center"></div>
-          </div>
           <section id="timer">
             <div class="time-container">
               <div class="time-unit">
@@ -33,15 +29,23 @@
               </div>
               <div class="time-unit">
                 <span class="time-value" id="seconds">00</span>
-                <span class="time-label" id="secondsText">секунди</span>
+                <span class="time-label" id="secondsText">секунд</span>
               </div>
             </div>
           </section>
         </div>
       </div>
+      <!-- Move compliment button here, outside envelope -->
+      <button id="compliment-button" class="hidden">💕</button>
     </div>
     <footer class="message">Кожна секунда робить нас ближче ❤</footer>
   </main>
+  
+  <!-- Keep compliment display outside for better visibility -->
+  <div id="compliment-display" class="hidden">
+    <div id="compliment-text"></div>
+    <button id="close-compliment">✕</button>
+  </div>
   
   <canvas id="confetti" width="1" height="1"></canvas>
   <audio id="beep" src="beep.mp3" preload="auto"></audio>
